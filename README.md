@@ -1,0 +1,41 @@
+# kmr_standardizer
+
+A Kurdish Kurmanji text standardizer based on [Rêbara Rastnivîsînê by Weqfa Mezopotamya](https://mezopirtuk.com/tr/rebera-rastnivisine-p10).
+
+Applies orthographic standardization rules to normalize Kurmanji Kurdish text into its standard written form.
+
+## Features
+
+**Preposition standardization**
+- `de` → `da` (e.g., *di mal de* → *di mal da*)
+- `re` → `ra` (e.g., *bi muzîkê re* → *bi muzîkê ra*)
+
+## Usage
+
+```python
+from kmr_standardizer import standardize
+
+text = "Berî çend salan, muzîka kurdî bi piranî di nav malbatan de dihat guhdarîkirin."
+result = standardize(text)
+# "Berî çend salan, muzîka kurdî bi piranî di nav malbatan da dihat guhdarîkirin."
+```
+
+## Installation
+
+```bash
+pip install kmr_standardizer
+```
+
+## Contribution
+
+```bash
+git clone https://github.com/cikay/kmr_standardizer.git
+cd kmr_standardizer
+pipenv install --dev
+```
+
+### Running Tests
+
+```bash
+pipenv run pytest tests/ -v
+```
