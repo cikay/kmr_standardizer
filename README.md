@@ -13,10 +13,10 @@ Applies orthographic standardization rules to normalize Kurmanji Kurdish text in
 ## Usage
 
 ```python
-from kmr_standardizer import standardize
+import kmr_standardizer
 
 text = "Berî çend salan, muzîka kurdî bi piranî di nav malbatan de dihat guhdarîkirin."
-result = standardize(text)
+result = kmr_standardizer.standardize(text)
 # "Berî çend salan, muzîka kurdî bi piranî di nav malbatan da dihat guhdarîkirin."
 ```
 
