@@ -20,12 +20,6 @@ result = kmr_standardizer.standardize(text)
 # "Berî çend salan, muzîka kurdî bi piranî di nav malbatan da dihat guhdarîkirin."
 ```
 
-## Installation
-
-```bash
-pip install kmr_standardizer
-```
-
 ## Contribution
 
 ```bash
