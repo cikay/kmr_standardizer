@@ -25,11 +25,19 @@ class TestDeToDA:
         expected = "di mal da û di bajêr da"
         assert processor.process(text) == expected
 
-    def test_does_not_replace_inside_words(self, processor):
-        """'de' inside words like 'dest' should not be replaced."""
-        assert processor.process("dest") == "dest"
-        assert processor.process("dema min tu ditî Nesrîn") == "dema min tu ditî Nesrîn"
-        assert processor.process("dengê") == "dengê"
+    @pytest.mark.parametrize(
+        "input,output",
+        [
+            (
+                "di destê min de çi heye?",
+                "di destê min de çi heye?",
+            ),
+            ("dengê xalê min", "dengê xalê min"),
+        ],
+    )
+    def test_does_not_replace_inside_words(self, input, output, processor):
+        """'de' inside words like should not be replaced."""
+        assert processor.process(input) == output
 
     def test_replacement_before_punctuation(self, processor):
         assert processor.process("di nav malbatan de,") == "di nav malbatan da,"
