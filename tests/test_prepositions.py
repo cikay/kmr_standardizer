@@ -30,7 +30,7 @@ class TestDeToDA:
         [
             (
                 "di destê min de çi heye?",
-                "di destê min de çi heye?",
+                "di destê min da çi heye?",
             ),
             ("dengê xalê min", "dengê xalê min"),
         ],
@@ -41,6 +41,22 @@ class TestDeToDA:
 
     def test_replacement_before_punctuation(self, processor):
         assert processor.process("di nav malbatan de,") == "di nav malbatan da,"
+
+    @pytest.mark.parametrize(
+        "input,output",
+        [
+            (
+                "Di dema pandemîyê de, mirov li malê man û li kokên xwe gerîyan.",
+                "Di dema pandemîyê da, mirov li malê man û li kokên xwe gerîyan.",
+            ),
+            (
+                "Di envanterên Tirkiyeyê de 300-400 destxetên Kurdî hene ku hîn ne dîjîtal in",
+                "Di envanterên Tirkiyeyê da 300-400 destxetên Kurdî hene ku hîn ne dîjîtal in",
+            ),
+        ],
+    )
+    def test_case_insensitive(self, input, output, processor):
+        assert processor.process(input) == output
 
     @pytest.mark.parametrize(
         "input,output",

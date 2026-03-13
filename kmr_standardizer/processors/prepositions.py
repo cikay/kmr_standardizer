@@ -7,8 +7,8 @@ from kmr_standardizer.models import Rule, CategoryTypes
 class PrepositionProcessor(Processor):
     rules = [
         Rule(
-            pattern=r"\bde\b",
-            replacement="da",  # replace de with da
+            pattern=r"(?i)(\bdi\b)([^.,;:!?\n]+?)\bde\b",
+            replacement=r"\1\2da",  # replace di ... de with di ... da
             category=CategoryTypes.PREPOSITION,
         ),
         Rule(
