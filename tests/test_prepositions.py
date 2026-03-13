@@ -39,6 +39,20 @@ class TestDeToDA:
         """'de' inside words like should not be replaced."""
         assert processor.process(input) == output
 
+    @pytest.mark.parametrize(
+        "input,output",
+        [
+            (
+                "Alex De Souza lîstikvanekî futbolê yê Brezîlî yê berê ye, niha jî teknîk direktor e",
+                "Alex De Souza lîstikvanekî futbolê yê Brezîlî yê berê ye, niha jî teknîk direktor e",
+            ),
+        ],
+    )
+    def test_does_not_replace_de_in_proper_nouns(self, input, output, processor):
+        # note: cannot handle the following sentence properly
+        # Kûçikê me di xaniyê terikandî yê Alex De Souza de hat dîtin
+        assert processor.process(input) == output
+
     def test_replacement_before_punctuation(self, processor):
         assert processor.process("di nav malbatan de,") == "di nav malbatan da,"
 
