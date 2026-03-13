@@ -46,6 +46,22 @@ class TestDeToDA:
         "input,output",
         [
             (
+                "Di dema pandemîyê de, mirov li malê man û li kokên xwe gerîyan.",
+                "Di dema pandemîyê da, mirov li malê man û li kokên xwe gerîyan.",
+            ),
+            (
+                "Di envanterên Tirkiyeyê de 300-400 destxetên Kurdî hene ku hîn ne dîjîtal in",
+                "Di envanterên Tirkiyeyê da 300-400 destxetên Kurdî hene ku hîn ne dîjîtal in",
+            ),
+        ],
+    )
+    def test_case_insensitive(self, input, output, processor):
+        assert processor.process(input) == output
+
+    @pytest.mark.parametrize(
+        "input,output",
+        [
+            (
                 "Berî çend salan, muzîka kurdî bi piranî di nav malbatan de, di dawetan de an jî di radyoyan de dihat guhdarîkirin.",
                 "Berî çend salan, muzîka kurdî bi piranî di nav malbatan da, di dawetan da an jî di radyoyan da dihat guhdarîkirin.",
             ),
