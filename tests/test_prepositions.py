@@ -30,7 +30,7 @@ class TestDeToDA:
         [
             (
                 "di destê min de çi heye?",
-                "di destê min de çi heye?",
+                "di destê min da çi heye?",
             ),
             ("dengê xalê min", "dengê xalê min"),
         ],
