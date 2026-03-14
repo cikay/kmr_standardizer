@@ -8,6 +8,7 @@ class Rule:
     pattern: str
     replacement: str
     category: str
+    name: str
 
 
 class CategoryTypes(str, Enum):
