@@ -7,7 +7,7 @@ Applies orthographic standardization rules to normalize Kurmanji Kurdish text in
 ## Features
 
 **Preposition standardization**
-- `de` → `da` (e.g., *di mal de* → *di mal da*)
+- `di ... de` → `di ... da` (e.g., *di mal de* → *di mal da*)
 - `re` → `ra` (e.g., *bi muzîkê re* → *bi muzîkê ra*)
 
 ## Usage
