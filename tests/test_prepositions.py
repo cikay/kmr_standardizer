@@ -8,7 +8,7 @@ def processor():
     return PrepositionProcessor()
 
 
-class TestDeToDA:
+class TestDiDeToDiDa:
     """Tests for di ... de → di ... da preposition rule."""
 
     def test_no_match(self, processor):
