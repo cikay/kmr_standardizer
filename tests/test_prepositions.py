@@ -5,7 +5,9 @@ from kmr_standardizer.processors.prepositions import PrepositionProcessor
 
 @pytest.fixture
 def processor():
-    return PrepositionProcessor()
+    processor = PrepositionProcessor()
+    processor.rules = [r for r in PrepositionProcessor.rules if r.name == "di...de->di...da"]
+    return processor
 
 
 class TestDiDeToDiDa:
@@ -82,4 +84,22 @@ class TestDiDeToDiDa:
         ],
     )
     def test_preserves_surrounding_text(self, input, output, processor):
+        assert processor.process(input) == output
+
+    def test_multiline_text(self, processor):
+        input = """
+            – Kontrola kêzik û parazîtan: Di genim û bîberan de kêzikan tune dike, bermayîyê %20-30 kêm dike.
+            – Parastina nirxê xwarinê: Di vîtamîna C û hêmanên hesas de windabûneka pir kêm çêdibe; carinan jî enzîman asteng dike û xwarinê diparêze.
+            – Bikaranîna çopên nukleerî: Çavkanîyên kevn ên tibî yên nukleerî (kobalt-60) bi vî awayî ji nû ve têne bikaranîn.
+            Li gorî raporanên IAEA yên 2025an, tîrêjkirin bi kêmkirina bermayîya xwarinê ji birçîbûnê re jî dibe alîkar; bi taybetî li welatên di asta pêşveçûnê de.
+            Li Tirkîyeyê jî ji sala 1999an ve bi du tesîsan ev rêbaz tê bikaranîn û di sektorên goşt û biharatê de bandorê zêde dike.
+        """
+
+        output = """
+            – Kontrola kêzik û parazîtan: Di genim û bîberan da kêzikan tune dike, bermayîyê %20-30 kêm dike.
+            – Parastina nirxê xwarinê: Di vîtamîna C û hêmanên hesas da windabûneka pir kêm çêdibe; carinan jî enzîman asteng dike û xwarinê diparêze.
+            – Bikaranîna çopên nukleerî: Çavkanîyên kevn ên tibî yên nukleerî (kobalt-60) bi vî awayî ji nû ve têne bikaranîn.
+            Li gorî raporanên IAEA yên 2025an, tîrêjkirin bi kêmkirina bermayîya xwarinê ji birçîbûnê re jî dibe alîkar; bi taybetî li welatên di asta pêşveçûnê da.
+            Li Tirkîyeyê jî ji sala 1999an ve bi du tesîsan ev rêbaz tê bikaranîn û di sektorên goşt û biharatê da bandorê zêde dike.
+        """
         assert processor.process(input) == output

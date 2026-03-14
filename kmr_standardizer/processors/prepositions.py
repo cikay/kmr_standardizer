@@ -10,11 +10,13 @@ class PrepositionProcessor(Processor):
             pattern=r"(?i)(\bdi\b)([^.,;:!?\n]+?)\bde\b",
             replacement=r"\1\2da",  # replace di ... de with di ... da
             category=CategoryTypes.PREPOSITION,
+            name="di...de->di...da",
         ),
         Rule(
             pattern=r"\bre\b",
             replacement="ra",  # replace re with ra
             category=CategoryTypes.PREPOSITION,
+            name="bi...re->bi...ra",
         ),
     ]
 
