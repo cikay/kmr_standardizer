@@ -4,11 +4,10 @@ A Kurdish Kurmanji text standardizer based on [Rêbara Rastnivîsînê by Weqfa 
 
 Applies orthographic standardization rules to normalize Kurmanji Kurdish text into its standard written form.
 
-## Features
-
-**Preposition standardization**
-- `di ... de` → `di ... da` (e.g., *di mal de* → *di mal da*)
-- `re` → `ra` (e.g., *bi muzîkê re* → *bi muzîkê ra*)
+## Install
+```
+pip install  git+https://github.com/cikay/kmr_standardizer.git
+```
 
 ## Usage
 
@@ -19,6 +18,13 @@ text = "Berî çend salan, muzîka kurdî bi piranî di nav malbatan de dihat gu
 result = kmr_standardizer.standardize(text)
 # "Berî çend salan, muzîka kurdî bi piranî di nav malbatan da dihat guhdarîkirin."
 ```
+
+## Features
+
+**Preposition standardization**
+- `di ... de` → `di ... da` (e.g., *di mal de* → *di mal da*)
+- `re` → `ra` (e.g., *bi muzîkê re* → *bi muzîkê ra*)
+
 
 ## Contribution
 
