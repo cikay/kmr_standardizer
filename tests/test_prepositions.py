@@ -5,9 +5,12 @@ from kmr_standardizer.processors.prepositions import PrepositionProcessor
 
 @pytest.fixture
 def processor():
-    processor = PrepositionProcessor()
-    processor.rules = [r for r in PrepositionProcessor.rules if r.name == "di...de->di...da"]
-    return processor
+    original_rules = PrepositionProcessor.rules
+    PrepositionProcessor.rules = [
+        r for r in original_rules if r.name == "di...de->di...da"
+    ]
+    yield PrepositionProcessor()
+    PrepositionProcessor.rules = original_rules
 
 
 class TestDiDeToDiDa:
