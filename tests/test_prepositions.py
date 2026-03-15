@@ -39,10 +39,17 @@ class TestDiDeToDiDa:
         """
         assert processor.process(text) == expected
 
-    def test_slash_between_di_de(self, processor):
-        text = "Di kirmanckî/zazakî de"
-        expected = "Di kirmanckî/zazakî da"
-        assert processor.process(text) == expected
+    @pytest.mark.parametrize(
+        "input,expected",
+        [
+            (
+                "Di kirmanckî/zazakî de ew “merdene” û di kurmanciya naverast (soranî) de jî “mirdin” e.", # / ( ) chars are allowed
+                "Di kirmanckî/zazakî da ew “merdene” û di kurmanciya naverast (soranî) da jî “mirdin” e."
+            ),
+        ],
+    )
+    def test_special_chars_between_di_de(self, input, expected, processor):
+        assert processor.process(input) == expected
 
     @pytest.mark.parametrize(
         "input,output",
