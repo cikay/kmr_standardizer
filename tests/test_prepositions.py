@@ -30,6 +30,20 @@ class TestDiDeToDiDa:
         expected = "di mal da û di bajêr da"
         assert processor.process(text) == expected
 
+    def test_comma_between_di_de(self, processor):
+        text = """"
+        Di cureyên berhemên wêjeya devkî de, di qalib, biwêj û gotinên pêşiyan de, di bêjeyên darêştî û yên hevedudanî de bi awayekî fosîlîzebûyî şêweyên kevn, form û morfemên kevnare yên hêvişandî tên dîtin ku ew ji bo peyitandina vê yekê çavkaniyên hêja ne.
+        """
+        expected = """"
+        Di cureyên berhemên wêjeya devkî da, di qalib, biwêj û gotinên pêşiyan da, di bêjeyên darêştî û yên hevedudanî da bi awayekî fosîlîzebûyî şêweyên kevn, form û morfemên kevnare yên hêvişandî tên dîtin ku ew ji bo peyitandina vê yekê çavkaniyên hêja ne.
+        """
+        assert processor.process(text) == expected
+
+    def test_slash_between_di_de(self, processor):
+        text = "Di kirmanckî/zazakî de"
+        expected = "Di kirmanckî/zazakî da"
+        assert processor.process(text) == expected
+
     @pytest.mark.parametrize(
         "input,output",
         [
