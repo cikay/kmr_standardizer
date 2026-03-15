@@ -1,8 +1,6 @@
 # kmr_standardizer
 
-A Kurdish Kurmanji text standardizer based on [Rêbara Rastnivîsînê by Weqfa Mezopotamya](https://mezopirtuk.com/tr/rebera-rastnivisine-p10).
-
-Applies orthographic standardization rules to normalize Kurmanji Kurdish text into its standard written form.
+A regex-based Kurdish Kurmanji text standardizer that applies orthographic rules from [Rêbara Rastnivîsînê by Weqfa Mezopotamya](https://mezopirtuk.com/tr/rebera-rastnivisine-p10) to normalize text into standard written form.
 
 ## Install
 ```
