@@ -13,6 +13,12 @@ class PrepositionProcessor(Processor):
             name="di...de->di...da",
         ),
         Rule(
+            pattern=r"(?i)\btê\s+de\b",
+            replacement=r"tê da",  # replace tê de with tê da
+            category=CategoryTypes.PREPOSITION,
+            name="tê de->tê da",
+        ),
+        Rule(
             pattern=r"\bre\b",
             replacement="ra",  # replace re with ra
             category=CategoryTypes.PREPOSITION,
