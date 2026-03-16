@@ -149,3 +149,65 @@ class TestTeDeToTeDa:
         text = "li jêrê nivîsî, ku tê   de jî awayê “mirt”ê derbas dibe"
         expected = "li jêrê nivîsî, ku tê da jî awayê “mirt”ê derbas dibe"
         assert te_de_processor.process(text) == expected
+
+
+@pytest.fixture
+def ji_de_processor():
+    original_rules = PrepositionProcessor.rules
+    PrepositionProcessor.rules = [r for r in original_rules if r.name == "ji...de->ji...da"]
+    yield PrepositionProcessor()
+    PrepositionProcessor.rules = original_rules
+
+
+class TestJiDeToJiDa:
+    """Tests for ji ... de → ji ... da preposition rule."""
+
+    def test_simple_replacement(self, ji_de_processor):
+        text = "Erê, hişmendiya piraniyê jinan ji vî alî de bihêz e, ne weke berê ye."
+        expected = (
+            "Erê, hişmendiya piraniyê jinan ji vî alî da bihêz e, ne weke berê ye."
+        )
+        assert ji_de_processor.process(text) == expected
+
+    def test_does_not_replace_when_di_between_ji_de(self, ji_de_processor):
+        text = "Tevgerîna bi awayê berpirsane divê ji bo me giştan rêbaza sereke be û em hewl bidin terman rast û di cih de bi kar bînin."
+        assert ji_de_processor.process(text) == text
+
+    def test_does_not_replace_when_bi_between_ji_de(self, ji_de_processor):
+        text = "Tiştê ji xwe re heq dibîne, ji yên din re nabîne, tiştê ji xwe re sedema berdewamiya hebûna xwe dibîne, ji bo yên din nabîne, tew bi ser de wan ji xwe re talûke jî dihesibîne."
+        assert ji_de_processor.process(text) == text
+
+    def test_does_not_replace_when_der_heqe_between_ji_de(self, ji_de_processor):
+        text = "Di serî de bibêjim ku derdê min ne ew e ez ji aliyê zanistî ve li ser têkiliya mêjî û zimên bisekinim û der heqê xewnan û binhişê mirov de jî analîzên psîkolojîk bikim."
+        assert ji_de_processor.process(text) == text
+
+    def test_does_not_replace_when_derheqe_between_ji_de(self, ji_de_processor):
+        "ji .. derheqê ... de"
+        text = "Ji xeynî van tabletan derheqê cebîr û geometrîyê de jî tablet hatine dîtin."
+        assert ji_de_processor.process(text) == text
+
+    def test_does_not_replace_when_der_bare_between_ji_de(self, ji_de_processor):
+        "ji .. der barê ... de"
+        text = "Herçî berhema Dionysios “Tekhne Grammatike” ye, ji bilî hevoksaziyê (sentaksê), der barê hemû mijarên zimên de 13 qirn wek deqeke hîmî li Rojava hatiye pejirandin"
+        assert ji_de_processor.process(text) == text
+
+    def test_does_not_replace_when_derbare_between_ji_de(self, ji_de_processor):
+        "ji .. derbarê ... de"
+        text = "Di heman demê de, ji sala 2014an vir ve li beşa Ziman û Çanda Kurdî ya zanîngeha Mêrdînê çend tezên Masterê yên derbarê Şahnameyên Kurdî de hatine amade kirin û têne amade kirin"
+        assert ji_de_processor.process(text) == text
+
+    def test_does_not_replace_when_te_between_ji_de(self, ji_de_processor):
+        "ji .. tê ... de"
+        text = "Min îsal jî li Wanê, ji zarê parêzera hêja Jînda Rûgeş Koçakê, ku ew ji Nordizê û ji Mamxuran e, ev a hanê ya li jêrê nivîsî, ku tê de jî awayê “mirt”ê derbas dibe."
+        assert ji_de_processor.process(text) == text
+
+    def test_does_not_replace_when_pe_between_ji_de(self, ji_de_processor):
+        "ji .. pê ... de"
+        text = "Hema em li van zimanan binêrin û wisan ji xwe re pê de herin û bipirsin"
+        assert ji_de_processor.process(text) == text
+
+    def test_does_not_replace_when_je_between_ji_de(self, ji_de_processor):
+        "ji .. jê ... de"
+        text = "We bi piştgiriya xwe ya li hember kurdan cinawirek afirand û niha ew cinawir dixwaze hinekî goştê we bixwe, ji ber ku li kurdan dev jê ber de goşt, hestî jî nemane."
+        assert ji_de_processor.process(text) == text
+
