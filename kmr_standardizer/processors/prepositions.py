@@ -19,12 +19,6 @@ class PrepositionProcessor(Processor):
             name="tê de->tê da",
         ),
         Rule(
-            pattern=r"(?i)(\bji\b)((?:(?!\b(?:bi|di|der heqê|derheqê|der barê|derbarê|tê|pê|jê)\b)[^.!?\n])*?)\bde\b",
-            replacement=r"\1\2da",  # replace ji ... de with ji ... da
-            category=CategoryTypes.PREPOSITION,
-            name="ji...de->ji...da",
-        ),
-        Rule(
             pattern=r"\bre\b",
             replacement="ra",  # replace re with ra
             category=CategoryTypes.PREPOSITION,
