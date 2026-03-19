@@ -39,6 +39,11 @@ class TestDiDeToDiDa:
         """
         assert processor.process(text) == expected
 
+    def test_dot_between_di_de(self, processor):
+        text = "Miheme Salihê Beynatî, sala 1938’an li gundê Beynata Farqînê hatiye dinyayê û di 19.05.1984’an de jî di ciwaniya xwe de xatirê xwe ji me xwast û serê xwe danî ser axa sar."
+        expected = "Miheme Salihê Beynatî, sala 1938’an li gundê Beynata Farqînê hatiye dinyayê û di 19.05.1984’an da jî di ciwaniya xwe da xatirê xwe ji me xwast û serê xwe danî ser axa sar."
+        assert processor.process(text) == expected
+
     @pytest.mark.parametrize(
         "input,expected",
         [
