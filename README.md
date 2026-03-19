@@ -22,7 +22,6 @@ result = kmr_standardizer.standardize(text)
 **Preposition standardization**
 - `di ... de` → `di ... da` (e.g., *di mal de* → *di mal da*)
 - `tê de` → `tê da` (e.g., *tê de ew peyv jî heye* → *tê da ew peyv jî heye*)
-- `ji ... de` → `ji ... da` (e.g., *ji vî alî de bihêz e* → *ji vî alî da bihêz e*)
 - `re` → `ra` (e.g., *bi muzîkê re* → *bi muzîkê ra*)
 
 
