@@ -44,6 +44,11 @@ class TestDiDeToDiDa:
         expected = "Miheme Salihê Beynatî, sala 1938’an li gundê Beynata Farqînê hatiye dinyayê û di 19.05.1984’an da jî di ciwaniya xwe da xatirê xwe ji me xwast û serê xwe danî ser axa sar."
         assert processor.process(text) == expected
 
+    def test_colon_between_di_de(self, processor):
+        text = "Di 12ê Tebaxê seet 20:00-02:00an de bi şîara “balgehê xwe hilde û were” Çalakîya Barîna Meteoran dê pêk were."
+        expected = "Di 12ê Tebaxê seet 20:00-02:00an da bi şîara “balgehê xwe hilde û were” Çalakîya Barîna Meteoran dê pêk were."
+        assert processor.process(text) == expected
+
     @pytest.mark.parametrize(
         "input,expected",
         [
