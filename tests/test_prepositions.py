@@ -43,8 +43,12 @@ class TestDiDeToDiDa:
         "input,expected",
         [
             (
-                "Di kirmanckî/zazakî de ew “merdene” û di kurmanciya naverast (soranî) de jî “mirdin” e.", # / ( ) chars are allowed
-                "Di kirmanckî/zazakî da ew “merdene” û di kurmanciya naverast (soranî) da jî “mirdin” e."
+                "Di kirmanckî/zazakî de ew “merdene” û di kurmanciya naverast (soranî) de jî “mirdin” e.",  # / ( ) are in between
+                "Di kirmanckî/zazakî da ew “merdene” û di kurmanciya naverast (soranî) da jî “mirdin” e.",
+            ),
+            (
+                "Di hejmara 17’an a kovara Pîneyê (1-15 Tîrmeh 2000) de, li rûpela 5’an, bi îmzaya A. Çîçek, ku ez ne şaş bim ew Dogan Guzelê danerê Qirix bû, karîkatureke qerfî li ser vê rewşa min xêz kiribû",  # - ( ) chars are allowed
+                "Di hejmara 17’an a kovara Pîneyê (1-15 Tîrmeh 2000) da, li rûpela 5’an, bi îmzaya A. Çîçek, ku ez ne şaş bim ew Dogan Guzelê danerê Qirix bû, karîkatureke qerfî li ser vê rewşa min xêz kiribû",
             ),
         ],
     )
