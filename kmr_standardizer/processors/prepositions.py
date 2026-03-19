@@ -7,7 +7,7 @@ from kmr_standardizer.models import Rule, CategoryTypes
 class PrepositionProcessor(Processor):
     rules = [
         Rule(
-            pattern=r"(?i)(\bdi\b)([^.;:!?\n]+?)\bde\b",
+            pattern=r"(?i)(\bdi\b)([^;:!?\n]+?)\bde\b",
             replacement=r"\1\2da",  # replace di ... de with di ... da
             category=CategoryTypes.PREPOSITION,
             name="di...de->di...da",

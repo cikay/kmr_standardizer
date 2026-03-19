@@ -8,6 +8,23 @@ def integration_test_processor():
     return PrepositionProcessor()
 
 
-def test_does_not_replace_not_covering_de_ka(integration_test_processor):
-    text = "De ka em vê hevokê îcar “çi qas” û “lê belê“yê bi hev ve binivîsîn û pirsa xwe bikin, bê ka ji hêla mehneyê ve çi diguhere"
-    assert integration_test_processor.process(text) == text
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        (
+            "De ka em vê hevokê îcar “çi qas” û “lê belê“yê bi hev ve binivîsîn û pirsa xwe bikin, bê ka ji hêla mehneyê ve çi diguhere",
+            "De ka em vê hevokê îcar “çi qas” û “lê belê“yê bi hev ve binivîsîn û pirsa xwe bikin, bê ka ji hêla mehneyê ve çi diguhere",
+        ),
+        (
+            "De îcar bifikirin ev tiştên li ser zimanê kurdî hatine gotin, eger ji bo erebî, ji bo farisî yan jî ji bo tirkî bihatina gotin kî dizane niha ew di çi rewşê û em jî di çi halî de bûn.",
+            "De îcar bifikirin ev tiştên li ser zimanê kurdî hatine gotin, eger ji bo erebî, ji bo farisî yan jî ji bo tirkî bihatina gotin kî dizane niha ew di çi rewşê û em jî di çi halî da bûn."
+            
+        ),
+        (
+            "De wê gavê mîna niha înternet û medyaya civakî jî tune bû",
+            "De wê gavê mîna niha înternet û medyaya civakî jî tune bû",
+        ),
+    ],
+)
+def test_does_not_replace_not_covered_de(input, expected, integration_test_processor):
+    assert integration_test_processor.process(input) == expected
