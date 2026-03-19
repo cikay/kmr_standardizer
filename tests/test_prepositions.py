@@ -49,6 +49,10 @@ class TestDiDeToDiDa:
         expected = "Di 12ê Tebaxê seet 20:00-02:00an da bi şîara “balgehê xwe hilde û were” Çalakîya Barîna Meteoran dê pêk were."
         assert processor.process(text) == expected
 
+    def test_does_not_replace_de_as_proper_noun(self, processor):
+        text = "Ji bilî van yekan, Ferdinand de Saussure ku ew hîmdarê zimannasiya binyadgeriyê ye, balê dikişîne aliyê fizîkî, fizyolojîk û ruhî yên melekeyên zimên û dibêje ku pêwendiya zimên bi warên ferdî û civakî re heye."
+        assert processor.process(text) == text
+
     @pytest.mark.parametrize(
         "input,expected",
         [
