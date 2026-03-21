@@ -14,7 +14,7 @@ class PrepositionProcessor(Processor):
         ),
         # replace der barê/derbarê/der heqê/derheqê ... de with der barê/derbarê/der heqê/derheqê ... da
         Rule(
-            pattern=r"(?i)(\bder\s*(barê|heqê))(.*?)\bde\b",
+            pattern=r"(?i)\b(der\s*(barê|heqê))\b(.*?)\bde\b",
             replacement=r"\1\3da",
             category=CategoryTypes.PREPOSITION,
             name="derbarê/derheqê ... de ->derbarê/derheqê ... da",
