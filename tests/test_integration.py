@@ -17,12 +17,15 @@ def integration_test_processor():
         ),
         (
             "De îcar bifikirin ev tiştên li ser zimanê kurdî hatine gotin, eger ji bo erebî, ji bo farisî yan jî ji bo tirkî bihatina gotin kî dizane niha ew di çi rewşê û em jî di çi halî de bûn.",
-            "De îcar bifikirin ev tiştên li ser zimanê kurdî hatine gotin, eger ji bo erebî, ji bo farisî yan jî ji bo tirkî bihatina gotin kî dizane niha ew di çi rewşê û em jî di çi halî da bûn."
-            
+            "De îcar bifikirin ev tiştên li ser zimanê kurdî hatine gotin, eger ji bo erebî, ji bo farisî yan jî ji bo tirkî bihatina gotin kî dizane niha ew di çi rewşê û em jî di çi halî da bûn.",
         ),
         (
             "De wê gavê mîna niha înternet û medyaya civakî jî tune bû",
             "De wê gavê mîna niha înternet û medyaya civakî jî tune bû",
+        ),
+        (
+            "ez behsa paşdaçeka “de/da“yê bikim, ji lew re ew “de” yan jî “da” kîjan bê tercîhkirin jî tesîr li awayê rastnivîsînê nake.",
+            "ez behsa paşdaçeka “de/da“yê bikim, ji lew ra ew “de” yan jî “da” kîjan bê tercîhkirin jî tesîr li awayê rastnivîsînê nake."
         ),
     ],
 )
