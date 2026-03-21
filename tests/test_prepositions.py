@@ -1,12 +1,6 @@
 import pytest
 
 from .base import BaseTest
-from kmr_standardizer.processors.prepositions import PrepositionProcessor
-
-
-@pytest.fixture
-def processor():
-    return PrepositionProcessor()
 
 
 class TestDiDeToDiDa(BaseTest):

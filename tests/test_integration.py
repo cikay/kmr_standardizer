@@ -1,12 +1,5 @@
 import pytest
 
-from kmr_standardizer.processors.prepositions import PrepositionProcessor
-
-
-@pytest.fixture
-def integration_test_processor():
-    return PrepositionProcessor()
-
 
 @pytest.mark.parametrize(
     "input,expected",
@@ -29,5 +22,5 @@ def integration_test_processor():
         ),
     ],
 )
-def test_does_not_replace_not_covered_de(input, expected, integration_test_processor):
-    assert integration_test_processor.process(input) == expected
+def test_does_not_replace_not_covered_de(input, expected, processor):
+    assert processor.process(input) == expected
