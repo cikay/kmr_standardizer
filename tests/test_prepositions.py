@@ -1,20 +1,18 @@
 import pytest
 
+from .base import BaseTest
 from kmr_standardizer.processors.prepositions import PrepositionProcessor
 
 
 @pytest.fixture
 def processor():
-    original_rules = PrepositionProcessor.rules
-    PrepositionProcessor.rules = [
-        r for r in original_rules if r.name == "di...de->di...da"
-    ]
-    yield PrepositionProcessor()
-    PrepositionProcessor.rules = original_rules
+    return PrepositionProcessor()
 
 
-class TestDiDeToDiDa:
+class TestDiDeToDiDa(BaseTest):
     """Tests for di ... de → di ... da preposition rule."""
+
+    rule_name = "di...de->di...da"
 
     def test_no_match(self, processor):
         assert processor.process("ez diçim malê") == "ez diçim malê"
@@ -147,23 +145,17 @@ class TestDiDeToDiDa:
         assert processor.process(input) == output
 
 
-@pytest.fixture
-def te_de_processor():
-    original_rules = PrepositionProcessor.rules
-    PrepositionProcessor.rules = [r for r in original_rules if r.name == "tê de->tê da"]
-    yield PrepositionProcessor()
-    PrepositionProcessor.rules = original_rules
-
-
-class TestTeDeToTeDa:
+class TestTeDeToTeDa(BaseTest):
     """Tests for tê de → tê da preposition rule."""
 
-    def test_simple_replacement(self, te_de_processor):
+    rule_name = "tê de->tê da"
+
+    def test_simple_replacement(self, processor):
         text = "bi her awayî ve raboriya me jî tê de ye"
         expected = "bi her awayî ve raboriya me jî tê da ye"
-        assert te_de_processor.process(text) == expected
+        assert processor.process(text) == expected
 
-    def test_multiple_whitespace_between_them(self, te_de_processor):
+    def test_multiple_whitespace_between_them(self, processor):
         text = "li jêrê nivîsî, ku tê   de jî awayê “mirt”ê derbas dibe"
         expected = "li jêrê nivîsî, ku tê da jî awayê “mirt”ê derbas dibe"
-        assert te_de_processor.process(text) == expected
+        assert processor.process(text) == expected
