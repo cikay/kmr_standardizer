@@ -171,6 +171,11 @@ class TestDerbareDerheqeDeToDerbareDerheqeDa(BaseTest):
         expected = "Sedema zehmetbûna diyarkirina çîrokên Şahnameyên Kurdî berî her tiştî ev e ku hejmareka nediyar ya destxetên Kurdî di kitêbxaneyên cuda yên dinyayê de di bin navê zimanekî din de hatine qeydkirin û ev yek jî bûye sedem ku vekolînên derbarê edebiyata Kurdî da bi zehmet bikevin"
         assert processor.process(text) == expected
 
+    def test_derbare_de_multiple_space(self, processor):
+        text = "derbarê  vê mijarê  de"
+        expected = "derbarê  vê mijarê  da"
+        assert processor.process(text) == expected
+
     def test_der_bare_de(self, processor):
         text = "Hestên neteweyî û helwesta axêverên wî zimanî ya der barê zimanê wan de"
         expected = (
@@ -178,14 +183,29 @@ class TestDerbareDerheqeDeToDerbareDerheqeDa(BaseTest):
         )
         assert processor.process(text) == expected
 
+    def test_der_bare_de_multiple_space(self, processor):
+        text = "der  barê  vê mijarê  de"
+        expected = "der  barê  vê mijarê  da"
+        assert processor.process(text) == expected
+
     def test_der_heqe_de(self, processor):
         text = "Lê bi kurtasî be jî, ez dixwazim dîsan çend gotinan der heqê vê yekê de bibêjim."
         expected = "Lê bi kurtasî be jî, ez dixwazim dîsan çend gotinan der heqê vê yekê da bibêjim."
         assert processor.process(text) == expected
 
+    def test_der_heqe_de_multiple_space(self, processor):
+        text = "der  heqê  vê mijarê  de"
+        expected = "der  heqê  vê mijarê  da"
+        assert processor.process(text) == expected
+
     def test_derheqe_de(self, processor):
         text = "Tişta gelekî balkêş a derheqê babilîyan de ev e ji bo hesabên xwe tablo çêdikirin."
         expected = "Tişta gelekî balkêş a derheqê babilîyan da ev e ji bo hesabên xwe tablo çêdikirin."
+        assert processor.process(text) == expected
+
+    def test_derheqe_de_multiple_space(self, processor):
+        text = "derheqê  vê mijarê  de"
+        expected = "derheqê  vê mijarê  da"
         assert processor.process(text) == expected
 
     # def replace_does_not_match(self):
