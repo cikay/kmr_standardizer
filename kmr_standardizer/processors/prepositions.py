@@ -12,6 +12,13 @@ class PrepositionProcessor(Processor):
             category=CategoryTypes.PREPOSITION,
             name="di...de->di...da",
         ),
+        # replace der barê/derbarê/der heqê/derheqê ... de with der barê/derbarê/der heqê/derheqê ... da
+        Rule(
+            pattern=r"(?i)(\bder\s*(barê|heqê))(.*?)\bde\b",
+            replacement=r"\1\3da",
+            category=CategoryTypes.PREPOSITION,
+            name="derbarê/derheqê ... de ->derbarê/derheqê ... da",
+        ),
         Rule(
             pattern=r"(?i)\btê\s+de\b",
             replacement=r"tê da",  # replace tê de with tê da
@@ -25,8 +32,3 @@ class PrepositionProcessor(Processor):
             name="bi...re->bi...ra",
         ),
     ]
-
-    def process(self, text: str) -> str:
-        for rule in self.rules:
-            text = re.sub(rule.pattern, rule.replacement, text)
-        return text

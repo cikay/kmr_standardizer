@@ -1,7 +1,13 @@
-from abc import ABC, abstractmethod
+import re
+from abc import ABC
+
+from kmr_standardizer.models import Rule
 
 
 class Processor(ABC):
-    @abstractmethod
+    rules: list[Rule] = []
+
     def process(self, text: str) -> str:
-        pass
+        for rule in self.rules:
+            text = re.sub(rule.pattern, rule.replacement, text)
+        return text

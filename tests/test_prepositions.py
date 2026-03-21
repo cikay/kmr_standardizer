@@ -1,20 +1,18 @@
 import pytest
 
+from .base import BaseTest
 from kmr_standardizer.processors.prepositions import PrepositionProcessor
 
 
 @pytest.fixture
 def processor():
-    original_rules = PrepositionProcessor.rules
-    PrepositionProcessor.rules = [
-        r for r in original_rules if r.name == "di...de->di...da"
-    ]
-    yield PrepositionProcessor()
-    PrepositionProcessor.rules = original_rules
+    return PrepositionProcessor()
 
 
-class TestDiDeToDiDa:
+class TestDiDeToDiDa(BaseTest):
     """Tests for di ... de → di ... da preposition rule."""
+
+    rule_name = "di...de->di...da"
 
     def test_no_match(self, processor):
         assert processor.process("ez diçim malê") == "ez diçim malê"
@@ -147,23 +145,49 @@ class TestDiDeToDiDa:
         assert processor.process(input) == output
 
 
-@pytest.fixture
-def te_de_processor():
-    original_rules = PrepositionProcessor.rules
-    PrepositionProcessor.rules = [r for r in original_rules if r.name == "tê de->tê da"]
-    yield PrepositionProcessor()
-    PrepositionProcessor.rules = original_rules
-
-
-class TestTeDeToTeDa:
+class TestTeDeToTeDa(BaseTest):
     """Tests for tê de → tê da preposition rule."""
 
-    def test_simple_replacement(self, te_de_processor):
+    rule_name = "tê de->tê da"
+
+    def test_simple_replacement(self, processor):
         text = "bi her awayî ve raboriya me jî tê de ye"
         expected = "bi her awayî ve raboriya me jî tê da ye"
-        assert te_de_processor.process(text) == expected
+        assert processor.process(text) == expected
 
-    def test_multiple_whitespace_between_them(self, te_de_processor):
+    def test_multiple_whitespace_between_them(self, processor):
         text = "li jêrê nivîsî, ku tê   de jî awayê “mirt”ê derbas dibe"
         expected = "li jêrê nivîsî, ku tê da jî awayê “mirt”ê derbas dibe"
-        assert te_de_processor.process(text) == expected
+        assert processor.process(text) == expected
+
+
+class TestDerbareDerheqeDeToDerbareDerheqeDa(BaseTest):
+    """Tests for derbarê/derheqê ... de ->derbarê/derheqê ... da preposition rule."""
+
+    rule_name = "derbarê/derheqê ... de ->derbarê/derheqê ... da"
+
+    def test_derbare_de(self, processor):
+        text = "Sedema zehmetbûna diyarkirina çîrokên Şahnameyên Kurdî berî her tiştî ev e ku hejmareka nediyar ya destxetên Kurdî di kitêbxaneyên cuda yên dinyayê de di bin navê zimanekî din de hatine qeydkirin û ev yek jî bûye sedem ku vekolînên derbarê edebiyata Kurdî de bi zehmet bikevin"
+        expected = "Sedema zehmetbûna diyarkirina çîrokên Şahnameyên Kurdî berî her tiştî ev e ku hejmareka nediyar ya destxetên Kurdî di kitêbxaneyên cuda yên dinyayê de di bin navê zimanekî din de hatine qeydkirin û ev yek jî bûye sedem ku vekolînên derbarê edebiyata Kurdî da bi zehmet bikevin"
+        assert processor.process(text) == expected
+
+    def test_der_bare_de(self, processor):
+        text = "Hestên neteweyî û helwesta axêverên wî zimanî ya der barê zimanê wan de"
+        expected = (
+            "Hestên neteweyî û helwesta axêverên wî zimanî ya der barê zimanê wan da"
+        )
+        assert processor.process(text) == expected
+
+    def test_der_heqe_de(self, processor):
+        text = "Lê bi kurtasî be jî, ez dixwazim dîsan çend gotinan der heqê vê yekê de bibêjim."
+        expected = "Lê bi kurtasî be jî, ez dixwazim dîsan çend gotinan der heqê vê yekê da bibêjim."
+        assert processor.process(text) == expected
+
+    def test_derheqe_de(self, processor):
+        text = "Tişta gelekî balkêş a derheqê babilîyan de ev e ji bo hesabên xwe tablo çêdikirin."
+        expected = "Tişta gelekî balkêş a derheqê babilîyan da ev e ji bo hesabên xwe tablo çêdikirin."
+        assert processor.process(text) == expected
+
+    # def replace_does_not_match(self):
+    #     text = "Berginda vê peyvê ya din jî “der barê… de” ye ku ew jî eynî mîna wê ne xwedî standardeke nivîsînê ye."
+    #     assert processor.process(text) == text
