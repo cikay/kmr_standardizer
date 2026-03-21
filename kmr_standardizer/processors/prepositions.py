@@ -25,8 +25,3 @@ class PrepositionProcessor(Processor):
             name="bi...re->bi...ra",
         ),
     ]
-
-    def process(self, text: str) -> str:
-        for rule in self.rules:
-            text = re.sub(rule.pattern, rule.replacement, text)
-        return text
