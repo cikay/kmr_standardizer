@@ -26,9 +26,27 @@ class PrepositionProcessor(Processor):
             name="tê de->tê da",
         ),
         Rule(
-            pattern=r"\bre\b",
-            replacement="ra",  # replace re with ra
+            pattern=r"(?i)\b(ji)\b((?:(?!\b(?:bi|di)\b).)*?)\bre\b",
+            replacement=r"\1\2ra",  # replace ji ... re with ji ... ra
             category=CategoryTypes.PREPOSITION,
-            name="bi...re->bi...ra",
+            name="ji ... re->ji ... ra",
+        ),
+        Rule(
+            pattern=r"(?i)\b(bi)\b((?:(?!\b(?:ji|di)\b).)*?)\bre\b",
+            replacement=r"\1\2ra",  # replace bi ... re with bi ... ra
+            category=CategoryTypes.PREPOSITION,
+            name="bi ... re->bi ... ra",
+        ),
+        Rule(
+            pattern=r"(?i)\b(di)\b((?:(?!\b(?:bi|ji)\b).)*?)\bre\b",
+            replacement=r"\1\2ra",  # replace di ... re with di ... ra
+            category=CategoryTypes.PREPOSITION,
+            name="di ... re->di ... ra",
+        ),
+        Rule(
+            pattern=r"(?i)\b(jê|pê)([ \t]+)re\b",
+            replacement=r"\1\2ra",  # preserve existing whitespace: "jê   re" -> "jê   ra"
+            category=CategoryTypes.PREPOSITION,
+            name="jê/pê/tê ... re->jê/pê/tê ... ra",
         ),
     ]

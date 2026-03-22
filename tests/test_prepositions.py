@@ -205,3 +205,94 @@ class TestDerbareDerheqeDeToDerbareDerheqeDa(BaseTest):
     # def replace_does_not_match(self):
     #     text = "Berginda vê peyvê ya din jî “der barê… de” ye ku ew jî eynî mîna wê ne xwedî standardeke nivîsînê ye."
     #     assert processor.process(text) == text
+
+
+class TestBiReToBiRa(BaseTest):
+    """Tests for bi ... re->bi ... ra preposition rule."""
+
+    rule_name = "bi ... re->bi ... ra"
+
+    def test_no_match(self, processor):
+        input = "Ji bo mirov bikare bi hunerê xwe bişîre divê bi qabiliyeta xwe jî bizane."
+        assert processor.process(input) == input
+
+    @pytest.mark.parametrize(
+        "input,expected",
+        [
+            (
+                "Carinan li ser teşeyê peyvekê pirs bi mirov re çêdibin bê çima wisan lê hatiye û ketiye rewşeke din.",
+                "Carinan li ser teşeyê peyvekê pirs bi mirov ra çêdibin bê çima wisan lê hatiye û ketiye rewşeke din.",
+            ),
+            (
+                "Ez bi vê rûdana hanê ya ku li min çêbûye gelek kêfxweş im û ji ber cihekî mistesna yê Ehmedê Xanî û şahesera wî Mem û Zîna wî bi min re heye jî, ez xwe bextewer dihesibînim.",
+                "Ez bi vê rûdana hanê ya ku li min çêbûye gelek kêfxweş im û ji ber cihekî mistesna yê Ehmedê Xanî û şahesera wî Mem û Zîna wî bi min ra heye jî, ez xwe bextewer dihesibînim.",
+            ),
+        ],
+    )
+    def test_bi_re_simple_replacement(self, input, expected, processor):
+        assert processor.process(input) == expected
+
+    def test_bi_re_multiple_match(self, processor):
+        text = "Li hêla din, bi kurdên hişyar û polîtîk re, çendî ku ew li xwebûna xwe û her tiştê aîdî nasnameyê ne dibin xwedî jî, eger bi awayekî giştî bê gotin, hişmendî û giringiya bikaranîna zimên a di her warî de bi wan re lawaz e."
+        expected = "Li hêla din, bi kurdên hişyar û polîtîk ra, çendî ku ew li xwebûna xwe û her tiştê aîdî nasnameyê ne dibin xwedî jî, eger bi awayekî giştî bê gotin, hişmendî û giringiya bikaranîna zimên a di her warî de bi wan ra lawaz e."
+        assert processor.process(text) == expected
+
+
+class TestJiReToJiRa(BaseTest):
+    """Tests for ji ... re->ji ... ra preposition rule."""
+
+    rule_name = "ji ... re->ji ... ra"
+
+    @pytest.mark.parametrize(
+        "input,expected",
+        [
+            (
+                "Carinan wekî jibîrbûyî bixuyên jî, lê ew di binhiş de bi cih bûne û wan ji xwe re hêlîna xwe çêkiriye",
+                "Carinan wekî jibîrbûyî bixuyên jî, lê ew di binhiş de bi cih bûne û wan ji xwe ra hêlîna xwe çêkiriye",
+            ),
+            (
+                "Berê mirov ber bi aliyekî de didin ku heta mirov sax be li darê dinyayê êdî ew ji mirov re dibin, aqil, tecrube, şîret û rênîşander.",
+                "Berê mirov ber bi aliyekî de didin ku heta mirov sax be li darê dinyayê êdî ew ji mirov ra dibin, aqil, tecrube, şîret û rênîşander.",
+            ),
+            (
+                "Zimanê kesên ku ji civakê re serkêşiyê dikin jî bi giranî bi tirkî ye.",
+                "Zimanê kesên ku ji civakê ra serkêşiyê dikin jî bi giranî bi tirkî ye."
+            ),
+        ],
+    )
+    def test_ji_re_simple_replacement(self, input, expected, processor):
+        assert processor.process(input) == expected
+
+
+class TestDiReToDiRa(BaseTest):
+    """Tests for di ... re->di ... ra preposition rule."""
+
+    rule_name = "di ... re->di ... ra"
+
+    def test_di_re_simple_replacement(self, processor):
+        text = "Meseleya zimanî, meseleyeke wisan e ku di ser hemû partî û rêxistinan re ye."
+        expected = "Meseleya zimanî, meseleyeke wisan e ku di ser hemû partî û rêxistinan ra ye."
+        assert processor.process(text) == expected
+
+
+class TestPeJeTeReToDRa(BaseTest):
+    """Tests for jê/pê/tê ... re->jê/pê/tê ... ra preposition rule."""
+
+    rule_name = "jê/pê/tê ... re->jê/pê/tê ... ra"
+
+    def test_je_re(self, processor):
+        text = "Ev jî kêşeyeke me ya din e û divê jê re jî çareseriyeke rast bê dîtin."
+        expected = (
+            "Ev jî kêşeyeke me ya din e û divê jê ra jî çareseriyeke rast bê dîtin."
+        )
+        assert processor.process(text) == expected
+
+    def test_pe_re(self, processor):
+        text = "Ji ber ku ziman bi awayekî xurt êdî li nifşa nûhatî nayê veguhastin, pê re jidestçûna çanda kurdî jî, her cure zargotin jî pêk tê"
+        expected = "Ji ber ku ziman bi awayekî xurt êdî li nifşa nûhatî nayê veguhastin, pê ra jidestçûna çanda kurdî jî, her cure zargotin jî pêk tê"
+        assert processor.process(text) == expected
+
+    def test_te_re(self, processor):
+        text = "Tevî ku serêşî û wextê wê yê rêwingiyê hindiktir e jî tê re neçûm."
+        expected = "Tevî ku serêşî û wextê wê yê rêwingiyê hindiktir e jî tê re neçûm."
+        assert processor.process(text) == expected
