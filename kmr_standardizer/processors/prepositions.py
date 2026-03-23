@@ -44,7 +44,7 @@ class PrepositionProcessor(Processor):
             name="di ... re->di ... ra",
         ),
         Rule(
-            pattern=r"(?i)\b(jê|pê)([ \t]+)re\b",
+            pattern=r"(?i)\b(jê|pê|tê)([ \t]+)re\b",
             replacement=r"\1\2ra",  # preserve existing whitespace: "jê   re" -> "jê   ra"
             category=CategoryTypes.PREPOSITION,
             name="jê/pê/tê ... re->jê/pê/tê ... ra",

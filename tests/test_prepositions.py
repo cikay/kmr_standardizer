@@ -294,5 +294,5 @@ class TestPeJeTeReToDRa(BaseTest):
 
     def test_te_re(self, processor):
         text = "Tevî ku serêşî û wextê wê yê rêwingiyê hindiktir e jî tê re neçûm."
-        expected = "Tevî ku serêşî û wextê wê yê rêwingiyê hindiktir e jî tê re neçûm."
+        expected = "Tevî ku serêşî û wextê wê yê rêwingiyê hindiktir e jî tê ra neçûm."
         assert processor.process(text) == expected
