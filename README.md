@@ -26,7 +26,12 @@ result = kmr_standardizer.standardize(text)
 - `derheqê ... de` → `derheqê ... da` (e.g., *derheqê vê mijarê de* → *derheqê vê mijarê da*)
 - `der heqê ... de` → `der heqê ... da` (e.g., *der heqê vê mijarê de* → *der heqê vê mijarê da*)
 - `tê de` → `tê da` (e.g., *tê de ew peyv jî heye* → *tê da ew peyv jî heye*)
-- `re` → `ra` (e.g., *bi muzîkê re* → *bi muzîkê ra*)
+- `ji ... re` → `ji ... ra` (e.g., *ji min re* → *ji min ra*)
+- `bi ... re` → `bi ... ra` (e.g., *bi min re* → *bi min ra*)
+- `di ... re` → `di ... ra` (e.g., *di bin re* → *di bin ra*)
+- `jê re` → `jê ra` (e.g., *Min jê re got* → *Min jê ra got*)
+- `pê re` → `pê ra` (e.g., *Ew jî pê re hat* → *Ew jî pê ra hat*)
+- `tê re` → `tê re` (e.g., *tê re derbas bûn* → *tê re derbas bûn*)
 
 
 ## Contribution
