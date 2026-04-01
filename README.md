@@ -135,6 +135,45 @@ pip install  git+https://github.com/cikay/kmr_standardizer.git
 ```
 
 
+**Oblique î-suffix standardization**
+
+Some words form their oblique case by adding the suffix `-î`. In non-standard writing, the vowel in the stem is often changed to `ê` instead. This rule maps such non-standard oblique forms back to the standard `-î` suffixed form, and also corrects the accompanying auxiliary verbs (`im` → `me`, `î` → `yî`, `e` → `ye`, `in` → `ne`).
+
+- welêt → welatî
+```py
+>>> import kmr_standardizer
+>>> text = "Ji her derê welêt heval hebûn."
+>>> kmr_standardizer.standardize(text)
+'Ji her derê welatî heval hebûn.'
+>>>
+```
+
+- welêt e → welatî ye
+```py
+>>> text = "ev xelat jî danasîna welêt e li derveyî Swêdê."
+>>> kmr_standardizer.standardize(text)
+'ev xelat jî danasîna welatî ye li derveyî Swêdê.'
+>>>
+```
+
+- welêt in → welatî ne
+```py
+>>> text = "hê jî li dervayê welêt in"
+>>> kmr_standardizer.standardize(text)
+'hê jî li dervayê welatî ne'
+>>>
+```
+
+- bajêr im → bajarî me
+```py
+>>> text = "Ez tevahiya rojê li bajêr im"
+>>> kmr_standardizer.standardize(text)
+'Ez tevahiya rojê li bajarî me'
+>>>
+```
+
+Supported words: welêt → welatî, dîwer → dîwarî, zimên → zimanî, bajêr → bajarî, êgir → agirî, mêst → mastî, nên → nanî, gênim → genimî, xênî → xanîyî, şivên → şivanî, dermên → dermanî
+
 ## Contribution
 
 ```bash
